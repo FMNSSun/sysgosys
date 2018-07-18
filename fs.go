@@ -93,12 +93,7 @@ func (s *sContext) Open(fpath string, flgs uint16) (Handle, SError) {
 		return NO_HANDLE, SErrorf(ERR_FS_FILE_NOT_FOUND, "File %q does not exist.", fpath)
 	}
 
-	err = s.AssocHandle(handle, f)
-
-	if err != nil {
-		f.Abort()
-		return NO_HANDLE, err
-	}
+	s.AssocHandle(handle, f)
 
 	return handle, nil
 }

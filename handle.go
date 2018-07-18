@@ -14,17 +14,15 @@ func (s *sContext) ReleaseHandle(handle Handle) {
 	// TODO
 }
 
-func (s *sContext) AssocHandle(handle Handle, with interface{}) SError {
+func (s *sContext) AssocHandle(handle Handle, with interface{}) {
 	s.hndlMutex.Lock()
 	defer s.hndlMutex.Unlock()
 
 	_, ok := s.handles[handle]
 
 	if ok {
-		return SErrorf(ERR_CORE_HANDLE_EXISTS, "Handle %d already exists.", handle)
+		// TODO: this should probably panic. 
 	}
 
 	s.handles[handle] = with
-
-	return nil
 }
